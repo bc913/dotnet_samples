@@ -18,6 +18,12 @@ public partial class LogViewModel : ObservableObject
     [ObservableProperty]
     private LogLevel? _filterLevel = null;
 
+#pragma warning disable CS8618, CS9264
+    public LogViewModel()
+    {
+        
+    }
+#pragma warning restore CS8618, CS9264
     public LogViewModel(ILoggerService logger)
     {
         _logger = logger;
