@@ -26,7 +26,7 @@ public partial class SampleViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void GenerateLog()
+    public void GenerateLog()
     {
         _logger.Log(LogLevel.Debug, "GenerateLog command executed.", nameof(SampleViewModel));
     }

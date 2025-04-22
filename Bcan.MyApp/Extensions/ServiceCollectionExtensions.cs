@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<ILoggerService, LoggerService>();
         collection.AddSingleton<LogViewModel>();
         collection.AddSingleton<SampleViewModel>();
+
         collection.AddSingleton<MainViewModel>();
     }
 }

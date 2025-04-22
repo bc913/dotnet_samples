@@ -4,7 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:Bcan.MyApp.ViewModels"
+             xmlns:views="using:Bcan.MyApp.Views"
              x:DataType="vm:MainViewModel"
              x:Class="Bcan.MyApp.Views.MainView">
-    Welcome to Avalonia!
+    <Grid RowDefinitions="Auto, *">
+        <Button Content="Generate Log" Command="{Binding SampleVm.GenerateLog}" 
+                Padding="8,4" Margin="10"/>
+        <views:LogView Grid.Row="1" DataContext="{Binding LoggerVm}"></views:LogView>
+    </Grid>
 </UserControl>

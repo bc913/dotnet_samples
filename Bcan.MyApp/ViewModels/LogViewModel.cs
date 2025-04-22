@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using Avalonia.Threading;
 using Bcan.MyApp.Contracts;
 using Bcan.MyApp.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -21,13 +22,13 @@ public partial class LogViewModel : ObservableObject
     {
         _logger = logger;
 
-        // logger.LogReceived += (s, e) =>
-        // {
-        //     App.Current.Dispatcher.Invoke(() =>
-        //     {
-        //         if (IsMatch(e)) Logs.Add(e);
-        //     });
-        // };
+        logger.LogReceived += (s, e) =>
+        {
+            Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+            {
+                if (IsMatch(e)) Logs.Add(e);
+            });
+        };
     }
 
     private bool IsMatch(LogEntry entry)
