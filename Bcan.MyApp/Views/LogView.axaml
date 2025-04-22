@@ -11,8 +11,21 @@
         <vm:LogViewModel/>
     </Design.DataContext>
     
-    <Grid>
-        <DataGrid Margin="20" ItemsSource="{Binding Logs}" 
+    <Grid Margin="10" RowDefinitions="Auto, Auto, Auto">
+        <!-- Filters -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10" Grid.Row="0" Spacing="10">
+            <ComboBox Width="120" 
+                      ItemsSource="{Binding LogLevels}"
+                      SelectedItem="{Binding FilterLevel, Mode=TwoWay}"
+                      PlaceholderText="Filter Level">
+            </ComboBox>
+
+            <TextBox Width="200" 
+                     Watermark="Search..." 
+                     Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        
+        <DataGrid Grid.Row="1" Margin="20" ItemsSource="{Binding FilteredLogs}" 
                   AutoGenerateColumns="False" IsReadOnly="True" 
                   HeadersVisibility="Column"
                   GridLinesVisibility="All">
@@ -25,7 +38,11 @@
             </DataGrid.Columns>
         </DataGrid>
         
-        <!-- <ListBox ItemsSource="{Binding Logs}" Margin="5"> -->
+        <!-- Clear Button -->
+        <Button Grid.Row="2" Content="Clear Logs" HorizontalAlignment="Right" Padding="8,4"
+                Command="{Binding ClearLogs}" />
+        
+        <!-- <ListBox  Grid.Row="3" ItemsSource="{Binding Logs}" Margin="5"> -->
         <!--     <ListBox.ItemTemplate> -->
         <!--         <DataTemplate> -->
         <!--             <StackPanel Orientation="Horizontal"> -->
