@@ -7,18 +7,35 @@
              x:Class="Bcan.MyApp.Views.LogView"
              x:DataType="vm:LogViewModel">
     
+    <Design.DataContext>
+        <vm:LogViewModel/>
+    </Design.DataContext>
+    
     <Grid>
-        <ListBox ItemsSource="{Binding Logs}" Margin="5">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Timestamp}"></TextBlock>
-                        <TextBlock Text="{Binding Level}"></TextBlock>
-                        <TextBlock Text="{Binding Source}"></TextBlock>
-                        <TextBlock Text="{Binding Message}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <DataGrid Margin="20" ItemsSource="{Binding Logs}" 
+                  AutoGenerateColumns="False" IsReadOnly="True" 
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="All">
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Time" Binding="{Binding Timestamp}" Width="150"/>
+                <DataGridTextColumn Header="Level" Binding="{Binding Level}" Width="80"/>
+                <DataGridTextColumn Header="Source" Binding="{Binding Source}" Width="150"/>
+                <DataGridTextColumn Header="Message" Binding="{Binding Message}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <!-- <ListBox ItemsSource="{Binding Logs}" Margin="5"> -->
+        <!--     <ListBox.ItemTemplate> -->
+        <!--         <DataTemplate> -->
+        <!--             <StackPanel Orientation="Horizontal"> -->
+        <!--                 <TextBlock Text="{Binding Timestamp}"></TextBlock> -->
+        <!--                 <TextBlock Text="{Binding Level}"></TextBlock> -->
+        <!--                 <TextBlock Text="{Binding Source}"></TextBlock> -->
+        <!--                 <TextBlock Text="{Binding Message}"></TextBlock> -->
+        <!--             </StackPanel> -->
+        <!--         </DataTemplate> -->
+        <!--     </ListBox.ItemTemplate> -->
+        <!-- </ListBox> -->
     </Grid>
 </UserControl>
