@@ -80,7 +80,7 @@ public partial class LogViewModel : ObservableObject
         //     filtered = filtered.Where(log => log.Level == FilterLevel);
         
         if (!string.IsNullOrWhiteSpace(FilterLevel) &&
-            Enum.TryParse<LogLevel>(FilterLevel, out var level))
+            Enum.TryParse<LogLevel>(FilterLevel, out var level) && level != LogLevel.All)
         {
             filtered = filtered.Where(log => log.Level == level);
         }

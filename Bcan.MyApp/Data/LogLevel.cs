@@ -7,5 +7,6 @@ public enum LogLevel
     Info,
     Warn,
     Error,
-    Fatal
+    Fatal,
+    All
 }
