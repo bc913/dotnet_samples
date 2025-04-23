@@ -14,10 +14,4 @@ public partial class MainViewModel : ViewModelBase
         _loggerVm = logViewModel;
         _sampleVm = sampleViewModel;
     }
-
-    [RelayCommand]
-    public void GenerateTheLog()
-    {
-        SampleVm.GenerateLog();
-    }
 }

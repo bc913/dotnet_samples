@@ -8,8 +8,10 @@
              x:DataType="vm:MainViewModel"
              x:Class="Bcan.MyApp.Views.MainView">
     <Grid RowDefinitions="Auto, *">
-        <Button Content="Generate Log" Command="{Binding SampleVm.GenerateLog}" 
-                Padding="8,4" Margin="10"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Content="Generate Log" Command="{Binding SampleVm.GenerateLog}" 
+                    Padding="8,4" Margin="10"/>
+        </StackPanel>
         <views:LogView Grid.Row="1" DataContext="{Binding LoggerVm}"></views:LogView>
     </Grid>
 </UserControl>
