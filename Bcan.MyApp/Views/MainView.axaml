@@ -11,6 +11,12 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Content="Generate Log" Command="{Binding SampleVm.GenerateLog}" 
                     Padding="8,4" Margin="10"/>
+            
+            <Button Content="Generate Async Log" Command="{Binding SampleVm.GenerateLogAsyncCommand}" 
+                    Padding="8,4" Margin="10"/>
+            
+            <Button Content="Generate Async Log" Command="{Binding SampleVm.GenerateLogAsync2}" 
+                    Padding="8,4" Margin="10"/>
         </StackPanel>
         <views:LogView Grid.Row="1" DataContext="{Binding LoggerVm}"></views:LogView>
     </Grid>

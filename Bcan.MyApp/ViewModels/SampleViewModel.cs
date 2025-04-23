@@ -13,6 +13,8 @@ public partial class SampleViewModel : ObservableObject
     public SampleViewModel(ILoggerService logger)
     {
         _logger = logger;
+        GenerateLogAsyncCommand = new AsyncRelayCommand(GenerateLogAsync);
+        
         _ = GenerateInitialLogAsync();
     }
 
@@ -29,5 +31,20 @@ public partial class SampleViewModel : ObservableObject
     public void GenerateLog()
     {
         _logger.Log(LogLevel.Debug, "GenerateLog command executed.", nameof(SampleViewModel));
+    }
+
+    public IAsyncRelayCommand GenerateLogAsyncCommand { get; }
+    
+    private async Task<string> GenerateLogAsync()
+    {
+        await _logger.LogAsync(LogLevel.Trace, "SampleViewModel initialized trace asynchronously.", nameof(SampleViewModel));
+        await Task.Delay(3000); // Simulate a web request
+        return "Hello world!";
+    }
+
+    [RelayCommand]
+    public async Task GenerateLogAsync2()
+    {
+        await _logger.LogAsync(LogLevel.Warn, "GenerateLogAsync2 executed.", nameof(SampleViewModel));
     }
 }
