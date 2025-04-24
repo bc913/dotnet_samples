@@ -40,6 +40,9 @@ public partial class LogViewModel : ObservableObject
             Avalonia.Threading.Dispatcher.UIThread.Post(() =>
             {
                 //if (IsMatch(e))
+                if(Logs.Count >= logger.MaxLogEntries)
+                    Logs.RemoveAt(0);
+                
                 Logs.Add(e);
                 ApplyFilter();
             });

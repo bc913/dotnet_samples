@@ -11,4 +11,5 @@ public interface ILoggerService
     Task LogAsync(LogLevel level, string message, string? source = null);
     ObservableCollection<LogEntry> LogEntries { get; }
     event EventHandler<LogEntry> LogReceived;
+    uint MaxLogEntries { get; }
 }

@@ -11,6 +11,9 @@ public class LoggerService : ILoggerService
     public ObservableCollection<LogEntry> LogEntries { get; } = new();
     public event EventHandler<LogEntry>? LogReceived;
 
+    // TODO: Fetch this from the ISettings
+    public uint MaxLogEntries { get; } = 20;
+
     public void Log(LogLevel level, string message, string? source = null)
     {
         var entry = new LogEntry { Level = level, Message = message, Source = source };
