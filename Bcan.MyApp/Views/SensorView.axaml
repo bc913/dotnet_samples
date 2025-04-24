@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Bcan.MyApp.ViewModels"
+             x:Class="Bcan.MyApp.Views.SensorView"
+             x:DataType="vm:SensorViewModel">
+    
+    <Border>
+        <Grid RowDefinitions="Auto, Auto, Auto">
+            <Border Grid.Row="0">
+                <Grid ColumnDefinitions="Auto, Auto">
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Button Command="{Binding StartCommand}">Start</Button>
+                        <Button Command="{Binding StopCommand}">Stop</Button>
+                    </StackPanel>
+            
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10">
+                        <TextBlock Text="{Binding StartCommand.ExecutionTask.Status, TargetNullValue='Task status: ', FallbackValue='Task status: ', StringFormat='Task status: {0}' }"></TextBlock>
+                        <TextBlock Text="{Binding StartCommand.ExecutionTask, Converter={StaticResource TaskResultConverter}, StringFormat='Result: {0}' }"></TextBlock>
+                        <TextBlock Text="Running" IsVisible="{Binding StartCommand.IsRunning}"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            
+            <Border Grid.Row="1">
+                <Grid ColumnDefinitions="Auto, Auto">
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Button Command="{Binding StartHeavyWorkCommand}">Start HW</Button>
+                        <Button Command="{Binding StopHeavyWorkCommand}">Stop HW</Button>
+                    </StackPanel>
+            
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10">
+                        <TextBlock Text="{Binding StartHeavyWorkCommand.ExecutionTask.Status, TargetNullValue='Task status: ', FallbackValue='Task status: ', StringFormat='Task status: {0}' }"></TextBlock>
+                        <TextBlock Text="{Binding StartHeavyWorkCommand.ExecutionTask, Converter={StaticResource TaskResultConverter}, StringFormat='Result: {0}' }"></TextBlock>
+                        <TextBlock Text="Task is Running" IsVisible="{Binding StartHeavyWorkCommand.IsRunning}"></TextBlock>
+                        <ProgressBar IsIndeterminate="True" IsVisible="{Binding StartHeavyWorkCommand.IsRunning}"
+                                     HorizontalAlignment="Center" VerticalAlignment="Center"></ProgressBar>
+                        <TextBlock Text="{Binding RealTimeStatus}"></TextBlock>
+                        <TextBlock Text="{Binding RealTimeUpdate}"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            
+            <Border Grid.Row="2">
+                <StackPanel Orientation="Vertical">
+                    <Button Command="{Binding RunSimulationCommand}">Start</Button>
+                    <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsBusy}"
+                                 HorizontalAlignment="Center" VerticalAlignment="Center"></ProgressBar>
+                </StackPanel>
+            </Border>
+            
+            
+        </Grid>
+    </Border>
+</UserControl>
