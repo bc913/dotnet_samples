@@ -1,16 +1,17 @@
 using Bcan.MyApp.Contracts;
 using Bcan.MyApp.Services;
 using Bcan.MyApp.ViewModels;
-using Bcan.MyApp.Views;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bcan.MyApp.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+    //https://github.com/AvaloniaUI/Avalonia/issues/10628
+    // TODO: Better file location within the appdata
     public static void AddServices(this IServiceCollection collection)
     {
-        collection.AddSingleton<ILoggerService, LoggerService>();
+        collection.AddSingleton<ILoggerService>(new LoggerService());
         collection.AddSingleton<LogViewModel>();
         collection.AddSingleton<SampleViewModel>();
         
