@@ -10,7 +10,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Bcan.MyApp.ViewModels;
 
-public partial class SensorViewModel : ObservableObject
+public partial class SensorViewModel : ObservableObject, IDisposable
 {
     private readonly ILoggerService _loggerService;
     private readonly string _name;
@@ -51,6 +51,7 @@ public partial class SensorViewModel : ObservableObject
     [ObservableProperty] private string _realTimeUpdate = string.Empty;
     [ObservableProperty] private string _realTimeStatus = string.Empty;
     private CancellationTokenSource? _tokenSource;
+    private bool _disposed = false;
 
     [RelayCommand]
     public async Task StartHeavyWorkAsync()
@@ -61,9 +62,12 @@ public partial class SensorViewModel : ObservableObject
             return;
         }
         
+        // Ensure previous task is cancelled and disposed if button is somehow clicked again
+        // though CanExecute should prevent this.
+        CancelAndDisposeTokenSource();
         _tokenSource = new CancellationTokenSource();
         RealTimeStatus = "Starting";
-
+        //IsTaskRunning = true;
         try
         {
             await DoHeavyWorkAsync(_tokenSource.Token);
@@ -75,8 +79,10 @@ public partial class SensorViewModel : ObservableObject
         }
         finally
         {
+            //IsTaskRunning = false;
             _tokenSource.Dispose();
             _tokenSource = null;
+            //CancelAndDisposeTokenSource();
         }
     }
     private async Task DoHeavyWorkAsync(CancellationToken token)
@@ -100,6 +106,37 @@ public partial class SensorViewModel : ObservableObject
     public void StopHeavyWork()
     {
         _tokenSource?.Cancel();
+    }
+    
+    private void CancelAndDisposeTokenSource()
+    {
+        if (_tokenSource == null) return;
+        
+        if (!_tokenSource.IsCancellationRequested)
+        {
+            _tokenSource.Cancel(); // Ensure cancellation is requested before disposing
+            //Debug.WriteLine("Cancellation requested via CancelAndDisposeTokenSource.");
+        }
+        
+        _tokenSource.Dispose();
+        _tokenSource = null;
+        //Debug.WriteLine("CancellationTokenSource disposed.");
+    }
+    
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed) return;
+        
+        if (disposing) {
+            CancelAndDisposeTokenSource();
+        }
+        _disposed = true;
     }
     #endregion
     
