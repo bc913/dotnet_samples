@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,6 +9,11 @@ using Bcan.MyApp.Contracts;
 using Bcan.MyApp.Data;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 
 namespace Bcan.MyApp.ViewModels;
 
@@ -20,6 +27,25 @@ public partial class SensorViewModel : ObservableObject, IDisposable
     {
         _loggerService = loggerService;
         _name = name;
+
+        Series = [
+            new LineSeries<DateTimePoint>
+            {
+                Values = _values,
+                Fill = null,
+                GeometryFill = null,
+                GeometryStroke = null
+            }
+        ];
+
+        _customAxis = new DateTimeAxis(TimeSpan.FromSeconds(1), Formatter)
+        {
+            CustomSeparators = GetSeparators(),
+            AnimationsSpeed = TimeSpan.FromMilliseconds(0),
+            SeparatorsPaint = new SolidColorPaint(SKColors.Black.WithAlpha(100))
+        };
+
+        XAxes = [_customAxis];
     }
     
     #region Attempt 1
@@ -98,7 +124,20 @@ public partial class SensorViewModel : ObservableObject, IDisposable
             await Task
                 .Delay(rand.Next(1000, 3000), token);
             //.ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing);
-            RealTimeUpdate = $"{rand.Next(1, 6)} samples generated.";
+            var generatedNumber = rand.Next(1, 6); 
+            RealTimeUpdate = $"{generatedNumber} generated.";
+
+            // Because we are updating the chart from a different thread 
+            // we need to use a lock to access the chart data. 
+            // this is not necessary if your changes are made on the UI thread. 
+            lock (Sync)
+            {
+                _values.Add(new DateTimePoint(DateTime.Now, generatedNumber));
+                if (_values.Count > 250) _values.RemoveAt(0);
+
+                // we need to update the separators every time we add a new point 
+                _customAxis.CustomSeparators = GetSeparators();
+            }
         }
     }
 
@@ -165,6 +204,44 @@ public partial class SensorViewModel : ObservableObject, IDisposable
         {
             IsBusy = false;
         }
+    }
+    #endregion
+
+    #region RealTime Chart
+
+    private readonly List<DateTimePoint> _values = [];
+    private readonly DateTimeAxis _customAxis;
+    
+
+    public ObservableCollection<ISeries> Series { get; set; }
+
+    public Axis[] XAxes { get; set; }
+
+    public object Sync { get; } = new object();
+
+    public bool IsReading { get; set; } = true;
+    private static double[] GetSeparators()
+    {
+        var now = DateTime.Now;
+
+        return
+        [
+            now.AddSeconds(-25).Ticks,
+            now.AddSeconds(-20).Ticks,
+            now.AddSeconds(-15).Ticks,
+            now.AddSeconds(-10).Ticks,
+            now.AddSeconds(-5).Ticks,
+            now.Ticks
+        ];
+    }
+
+    private static string Formatter(DateTime date)
+    {
+        var secsAgo = (DateTime.Now - date).TotalSeconds;
+
+        return secsAgo < 1
+            ? "now"
+            : $"{secsAgo:N0}s ago";
     }
     #endregion
 }

@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:Bcan.MyApp.ViewModels"
+             xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              x:Class="Bcan.MyApp.Views.SensorView"
              x:DataType="vm:SensorViewModel">
     
     <Border>
-        <Grid RowDefinitions="Auto, Auto, Auto">
+        <Grid RowDefinitions="Auto, Auto, Auto, *">
             <Border Grid.Row="0">
                 <Grid ColumnDefinitions="Auto, Auto">
                     <StackPanel Grid.Column="0" Orientation="Vertical">
@@ -51,6 +52,13 @@
                 </StackPanel>
             </Border>
             
+            <Border Grid.Row="3">
+                <lvc:CartesianChart
+                    SyncContext="{Binding Sync}"
+                    Series="{Binding Series}"
+                    XAxes="{Binding XAxes}">
+                </lvc:CartesianChart>
+            </Border>
             
         </Grid>
     </Border>
