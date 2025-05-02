@@ -1,0 +1,141 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Bcan.MyApp.ViewModels"
+             xmlns:controls="using:Bcan.MyApp.Resources"
+             xmlns:conv="using:Bcan.MyApp.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Bcan.MyApp.Controls.NavBar">
+    
+    <UserControl.Styles>
+
+      <Style Selector="Separator">
+        <Setter Property="Background" Value="{DynamicResource AcrylicTrimForeground}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="{DynamicResource MenuFlyoutSeparatorThemePadding}" />
+        <Setter Property="Height" Value="{DynamicResource MenuFlyoutSeparatorThemeHeight}" />
+      </Style>
+
+      <Style Selector="controls|NavBarItem" x:DataType="vm:NavBarItemVm">
+        <Setter Property="Width" Value="75" />
+        <Setter Property="Height" Value="58" />
+        <Setter Property="Margin" Value="4 1" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+      </Style>
+
+      <Style Selector="controls|NavBarItem StackPanel">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Spacing" Value="2" />
+      </Style>
+
+      <Style Selector="controls|NavBarItem StackPanel controls|FadeOutTextControl">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeH9}" />
+      </Style>
+
+      <Style Selector="controls|NavBarItem StackPanel PathIcon" x:CompileBindings="False">
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource AcrylicTrimForeground}" />
+        <Setter Property="Data" Value="{Binding IconName, Converter={x:Static conv:NavBarIconConverter.Instance}}" />
+      </Style>
+
+      <Style Selector="controls|NavBarItem StackPanel LayoutTransformControl">
+        <Setter Property="LayoutTransform" Value="scaleY(1)" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="Transitions">
+          <Transitions>
+            <TransformOperationsTransition Property="LayoutTransform" Duration="0:0:0.175" />
+            <DoubleTransition Property="Opacity" Duration="0:0:0.175" Easing="1,0,1,0" />
+          </Transitions>
+        </Setter>
+      </Style>
+
+      <Style Selector="Ellipse.loadingindicator">
+        <Setter Property="Fill" Value="{DynamicResource AcrylicTrimForeground}" />
+        <Setter Property="Width" Value="8" />
+        <Setter Property="Height" Value="8" />
+        <Setter Property="Margin" Value="6" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="Transitions">
+          <Transitions>
+            <BrushTransition Property="Fill" Duration="0:0:2" />
+          </Transitions>
+        </Setter>
+      </Style>
+
+      <Style Selector="Ellipse:not(.isLoading).isLoggedIn">
+        <Setter Property="Opacity" Value="1" />
+      </Style>
+
+      <Style Selector="Ellipse.isLoading.isLoggedIn">
+        <Style.Animations>
+          <Animation IterationCount="Infinite" Duration="0:0:1">
+            <KeyFrame Cue="50%">
+              <Setter Property="Opacity" Value="1" />
+            </KeyFrame>
+          </Animation>
+        </Style.Animations>
+      </Style>
+
+      <Style Selector="Ellipse.isLoggedIn.isCoinjoining">
+        <Setter Property="Fill" Value="{DynamicResource CoinjoinActiveColor}" />
+      </Style>
+
+      <Style Selector="ListBoxItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="ClipToBounds" Value="False"/>
+      </Style>
+      <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent"/>
+      </Style>
+      <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+      </Style>
+
+      <!-- Selected State -->
+      <Style Selector="controls|NavBarItem.selected /template/ Border#SelectionBackground">
+        <Setter Property="Opacity" Value="0.1" />
+      </Style>
+      <Style Selector="controls|NavBarItem.selected StackPanel LayoutTransformControl">
+        <Setter Property="LayoutTransform" Value="scaleY(0)" />
+        <Setter Property="Opacity" Value="0" />
+      </Style>
+      <Style Selector="controls|NavBarItem.selected PathIcon" x:CompileBindings="False">
+        <Setter Property="Data" Value="{Binding IconNameFocused, Converter={x:Static conv:NavBarIconConverter.Instance}}" />
+      </Style>
+
+    </UserControl.Styles>
+  
+    <DockPanel Margin="0 0 0 5" DockPanel.Dock="Left">
+      <!-- Bottom items -->
+      <!-- <ItemsControl ItemsSource="{Binding BottomItems}" -->
+      <!--               DockPanel.Dock="Bottom"> -->
+      <!--   <ItemsControl.ItemsPanel> -->
+      <!--     <ItemsPanelTemplate> -->
+      <!--       <ReversibleStackPanel ReverseOrder="True" /> -->
+      <!--     </ItemsPanelTemplate> -->
+      <!--   </ItemsControl.ItemsPanel> -->
+      <!--   <ItemsControl.DataTemplates> -->
+      <!--     <DataTemplate DataType="vm:NavBarItemVm"> -->
+      <!--       <controls:NavBarItem Command="{Binding OpenCommand}"> -->
+      <!--         <StackPanel> -->
+      <!--           <PathIcon Classes="new size24" Data="{StaticResource nav_add_circle_24_filled}"/> -->
+      <!--           <LayoutTransformControl> -->
+      <!--             <controls:FadeOutTextControl Text="{Binding Title}" /> -->
+      <!--           </LayoutTransformControl> -->
+      <!--         </StackPanel> -->
+      <!--       </controls:NavBarItem> -->
+      <!--     </DataTemplate> -->
+      <!--   </ItemsControl.DataTemplates> -->
+      <!-- </ItemsControl> -->
+      <!-- ~1~ Separator @1@ -->
+      <!-- <Separator DockPanel.Dock="Bottom" /> -->
+    </DockPanel>
+</UserControl>

@@ -5,22 +5,69 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:Bcan.MyApp.ViewModels"
              xmlns:views="using:Bcan.MyApp.Views"
+             xmlns:controls="using:Bcan.MyApp.Controls"
+             xmlns:conv="using:Bcan.MyApp.Converters"
              x:DataType="vm:MainViewModel"
              x:Class="Bcan.MyApp.Views.MainView">
-    <Grid RowDefinitions="Auto, *, *">
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Content="Generate Log" Command="{Binding SampleVm.GenerateLog}" 
-                    Padding="8,4" Margin="10"/>
+    
+  
+    <DockPanel>
+        <Border Height="25" Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
+            <TextBlock Foreground="Black">Dock = "Header Bar"</TextBlock>
+        </Border>
+        <!---->
+        <DockPanel>
+            <!--Navbar-->
+            <!-- <controls:ClaudeIconedButton  -->
+            <!--     Text="Home"  -->
+            <!--     IconSize="32" -->
+            <!--     ButtonWidth="60"  -->
+            <!--     ButtonHeight="60" -->
+            <!--     Command="{Binding NavigateHomeCommand}" -->
+            <!--     IconData="{StaticResource HomeIcon}"/> -->
             
-            <Button Content="Generate Async Log" Command="{Binding SampleVm.GenerateLogAsyncCommand}" 
-                    Padding="8,4" Margin="10"/>
+            <DockPanel Margin="0 0 0 5" DockPanel.Dock="Left">
             
-            <Button Content="Generate Async Log" Command="{Binding SampleVm.GenerateLogAsync2}" 
-                    Padding="8,4" Margin="10"/>
-        </StackPanel>
-        <views:LogView Grid.Row="1" DataContext="{Binding LoggerVm}"></views:LogView>
-        <Grid Grid.Row="2">
-           <views:SensorView DataContext="{Binding SensorVm}"></views:SensorView>
-        </Grid>
-    </Grid>
+                <ItemsControl ItemsSource="{Binding BottomItems}"
+                              DockPanel.Dock="Bottom">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ReversibleStackPanel ReverseOrder="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.DataTemplates>
+                        <DataTemplate DataType="vm:NavBarItemVm">
+                            <controls:ClaudeIconedButton 
+                                Text="{Binding Title}"
+                                IconSize="32"
+                                ButtonWidth="60" 
+                                ButtonHeight="60"
+                                
+                                IconData="{Binding IconName, Converter={StaticResource NavBarIconConverter}}"/>
+                        </DataTemplate>
+                    </ItemsControl.DataTemplates>
+                </ItemsControl>
+            </DockPanel>
+            <Border>
+                <Grid RowDefinitions="Auto, *, *">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Button Content="Generate Log" Command="{Binding SampleVm.GenerateLog}" 
+                                Padding="8,4" Margin="10"/>
+            
+                        <Button Content="Generate Async Log" Command="{Binding SampleVm.GenerateLogAsyncCommand}" 
+                                Padding="8,4" Margin="10"/>
+            
+                        <Button Content="Generate Async Log" Command="{Binding SampleVm.GenerateLogAsync2}" 
+                                Padding="8,4" Margin="10"/>
+                    </StackPanel>
+                    <views:LogView Grid.Row="1" DataContext="{Binding LoggerVm}"></views:LogView>
+                    <Grid Grid.Row="2">
+                        <views:SensorView DataContext="{Binding SensorVm}"></views:SensorView>
+                    </Grid>
+                </Grid>
+            </Border>
+        </DockPanel>
+        
+    </DockPanel>
+    
 </UserControl>
