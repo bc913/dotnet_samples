@@ -1,0 +1,41 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        
+    </Design.PreviewWith>
+    
+    <!-- Add Resources Here -->
+    
+    <ControlTheme x:Key="BcIconButton" TargetType="Button">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Viewbox Stretch="Uniform" 
+                         Height="{TemplateBinding Height}"
+                         Width="{TemplateBinding Width}">
+                    <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}"/>
+                </Viewbox>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^:pointerover /template/ Path#PART_IconPath">
+            <Setter Property="StrokeThickness" Value="3" />
+        </Style>
+    </ControlTheme>
+    
+    <ControlTheme x:Key="EllipseButton" TargetType="Button">
+        <Setter Property="Background" Value="Blue"/>
+        <Setter Property="Foreground" Value="Yellow"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Ellipse Fill="{TemplateBinding Background}"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"/>
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      Margin="{TemplateBinding Padding}"/>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

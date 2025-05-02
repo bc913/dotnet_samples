@@ -1,0 +1,62 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Bcan.Uctrls.Pg.Controls">
+    <Design.PreviewWith>
+        <StackPanel>
+            <!-- <controls:IconedTextButton IconSize="32"  -->
+            <!--                            IconData="{StaticResource Settings}" -->
+            <!--                            IconBrush="Blue" -->
+            <!--                            Label="Settings" -->
+            <!--                            LabelSize="14" -->
+            <!--                            LabelBrush="Red"/> -->
+        
+            <controls:IconedTextButton IconSize="48" 
+                                       IconData="{StaticResource Settings}"
+                                       IconBrush="Blue"
+                                       Label="Settings"
+                                       LabelSize="14"
+                                       LabelBrush="Red"/>
+            <!--Defaults-->
+            <controls:IconedTextButton IconSize="48" 
+                                       IconData="{StaticResource Settings}"
+                                       Label="Settings"
+                                       LabelSize="14"/>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|IconedTextButton">
+        <!-- Set Defaults -->
+        <Setter Property="IconBrush" Value="{DynamicResource AppPrimaryColor}"></Setter>
+        <Setter Property="LabelBrush" Value="{DynamicResource AppOnBackgroundColor}"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Button Name="PART_IconButton"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Command="{TemplateBinding Command}"
+                        CommandParameter="{TemplateBinding CommandParameter}"
+                        ToolTip.Tip="{TemplateBinding ToolTipText}"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Padding="4">
+                    
+                    <!-- <ToolTip.Tip> -->
+                    <!--     <StackPanel> -->
+                    <!--         <TextBlock  -->
+                    <!--             FontSize="12"  -->
+                    <!--             Text="{TemplateBinding ToolTipText}"/> -->
+                    <!--     </StackPanel> -->
+                    <!-- </ToolTip.Tip> -->
+                    
+                        <controls:IconedLabel
+                            IconSize="{TemplateBinding IconSize}" 
+                            IconData="{TemplateBinding IconData}"
+                            IconBrush="{TemplateBinding IconBrush}"
+                            Label="{TemplateBinding Label}"
+                            LabelSize="{TemplateBinding LabelSize}"
+                            LabelBrush="{TemplateBinding LabelBrush}"/>
+                </Button>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

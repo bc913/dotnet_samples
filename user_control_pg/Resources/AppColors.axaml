@@ -1,0 +1,46 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="using:System">
+    <!--CAn only be referred as DynamicResource-->
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="AppShadowColor" Color="{StaticResource PrimaryDarkColor}"/>
+            <SolidColorBrush x:Key="AppPrimaryColor" Color="{StaticResource DarkThemePrimaryColor}"/>
+            <SolidColorBrush x:Key="AppPrimaryVariantColor" Color="{StaticResource PrimaryVariantColor}"/>
+            <SolidColorBrush x:Key="AppSecondaryColor" Color="{StaticResource SecondaryColor}"/>
+            <SolidColorBrush x:Key="AppSecondaryVariantColor" Color="{StaticResource SecondaryVariantColor}"/>
+            <SolidColorBrush x:Key="AppBackgroundColor" Color="{StaticResource DarkThemeBackgroundColor}"/>
+            <SolidColorBrush x:Key="AppSurfaceColor" Color="{StaticResource DarkThemeSurfaceColor}"/>
+            <SolidColorBrush x:Key="AppErrorColor" Color="{StaticResource DarkThemeErrorColor}"/>
+            <SolidColorBrush x:Key="AppOnPrimaryColor" Color="{StaticResource DarkThemeOnPrimaryColor}"/>
+            <SolidColorBrush x:Key="AppOnSecondaryColor" Color="{StaticResource DarkThemeOnSecondaryColor}"/>
+            <SolidColorBrush x:Key="AppOnBackgroundColor" Color="{StaticResource DarkThemeOnBackgroundColor}"/>
+            <SolidColorBrush x:Key="AppOnSurfaceColor" Color="{StaticResource DarkThemeOnSurfaceColor}"/>
+            <SolidColorBrush x:Key="AppOnErrorColor" Color="{StaticResource DarkThemeOnErrorColor}"/>
+            <sys:String x:Key="AppWavesSvgStr">avares://Bcan.Uctrls.Pg/Assets/Icons/svg/phosphor/waves-duotone.svg</sys:String>
+            <SvgImage x:Key="AppWavesSvg" Source="avares://Bcan.Uctrls.Pg/Assets/Icons/svg/phosphor/waves.svg"></SvgImage>
+        </ResourceDictionary>
+        
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="AppShadowColor" Color="{StaticResource PrimaryLightColor}"/>
+            <SolidColorBrush x:Key="AppPrimaryColor" Color="{StaticResource LightThemePrimaryColor}"/>
+            <SolidColorBrush x:Key="AppPrimaryVariantColor" Color="{StaticResource PrimaryVariantColor}"/>
+            <SolidColorBrush x:Key="AppSecondaryColor" Color="{StaticResource SecondaryColor}"/>
+            <SolidColorBrush x:Key="AppSecondaryVariantColor" Color="{StaticResource SecondaryVariantColor}"/>
+            <SolidColorBrush x:Key="AppBackgroundColor" Color="{StaticResource LightThemeBackgroundColor}"/>
+            <SolidColorBrush x:Key="AppSurfaceColor" Color="{StaticResource LightThemeSurfaceColor}"/>
+            <SolidColorBrush x:Key="AppErrorColor" Color="{StaticResource LightThemeErrorColor}"/>
+            <SolidColorBrush x:Key="AppOnPrimaryColor" Color="{StaticResource LightThemeOnPrimaryColor}"/>
+            <SolidColorBrush x:Key="AppOnSecondaryColor" Color="{StaticResource LightThemeOnSecondaryColor}"/>
+            <SolidColorBrush x:Key="AppOnBackgroundColor" Color="{StaticResource LightThemeOnBackgroundColor}"/>
+            <SolidColorBrush x:Key="AppOnSurfaceColor" Color="{StaticResource LightThemeOnSurfaceColor}"/>
+            <SolidColorBrush x:Key="AppOnErrorColor" Color="{StaticResource LightThemeOnErrorColor}"/>
+            <sys:String x:Key="AppWavesSvgStr">avares://Bcan.Uctrls.Pg/Assets/Icons/svg/phosphor/waves-duotone.svg</sys:String>
+
+            <SvgImage x:Key="AppWavesSvg" Source="avares://Bcan.Uctrls.Pg/Assets/Icons/svg/phosphor/waves-duotone.svg"></SvgImage>
+
+
+        </ResourceDictionary>
+        
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

@@ -1,0 +1,61 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Bcan.Uctrls.Pg.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="using:Bcan.Uctrls.Pg.Controls"
+        xmlns:conv="using:Bcan.Uctrls.Pg.Converters"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Bcan.Uctrls.Pg.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Bcan.Uctrls.Pg">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    <!--https://github.com/wieslawsoltes/Svg.Skia/issues/237-->
+    <DockPanel LastChildFill="True">
+        <Border Height="48" BorderThickness="2" BorderBrush="{DynamicResource AppSurfaceColor}" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Dock = "Top"</TextBlock>
+            </StackPanel>
+        </Border>
+        
+        <Border BorderThickness="0 0 4 0" BorderBrush="{DynamicResource AppSurfaceColor}" DockPanel.Dock="Left">
+            
+        <DockPanel>
+            <ItemsControl ItemsSource="{Binding NavBarItems}"
+                          DockPanel.Dock="Bottom">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ReversibleStackPanel ReverseOrder="True" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="vm:IconedButtonVm">
+                        <!-- <controls:IconedTextButton -->
+                        <!--     Label="{Binding Text}" -->
+                        <!--     ToolTipText="{Binding Text}" -->
+                        <!--     IconSize="24" -->
+                        <!--     Command="{Binding $parent.((vm:MainWindowViewModel)DataContext).ToggleThemeCommand}" -->
+                        <!--     IconData="{Binding Icon, Converter={StaticResource StreamGeometryConverter}}"/> -->
+                        
+                        <!-- <Svg Path="/Assets/Icons/svg/phosphor/waves.svg" Css="{Binding Fill, Converter={x:Static conv:BcValueConverters.ColorToCssConverter}}" Width="24" Height="24"></Svg> -->
+                        <Svg Path="/Assets/Icons/svg/phosphor/waves.svg" Css=".Black { fill: #ff416bdf; }" Width="24" Height="24"></Svg>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </DockPanel>
+        </Border>
+        
+        <Border BorderThickness="1">
+            <TextBlock>This content will "Fill" the remaining space</TextBlock>
+        </Border>
+    </DockPanel>
+    
+    
+
+</Window>

@@ -1,0 +1,71 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Bcan.Uctrls.Pg.Controls">
+    <Design.PreviewWith>
+        <StackPanel Orientation="Horizontal" Spacing="24">
+            
+            
+            <controls:IconedLabel
+                IconSize="32"
+                IconData="{StaticResource Settings}"
+                IconBrush="Blue"
+                Label="Settings"
+                LabelSize="14"
+                LabelBrush="Red"/>
+            
+            <controls:IconedLabel
+                TextPosition="Right"
+                IconSize="32" 
+                IconData="{StaticResource Settings}"
+                IconBrush="Blue"
+                Label="Settings"
+                LabelSize="14"
+                LabelBrush="Red"/>
+            <!--Defaults-->
+            <controls:IconedLabel
+                TextPosition="Right"
+                IconSize="32" 
+                IconData="{StaticResource Settings}"
+                Label="Settings"
+                LabelSize="14"/>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|IconedLabel">
+        <!-- Set Defaults -->
+        <Setter Property="IconBrush" Value="{DynamicResource AppPrimaryColor}"></Setter>
+        <Setter Property="LabelBrush" Value="{DynamicResource AppOnBackgroundColor}"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Padding="4 4 4 4" ClipToBounds="True" Background="Transparent">
+                    
+                    <StackPanel Orientation="Vertical" Spacing="4" Name="PART_StackPan">
+                        <Path Name="PART_IconPath"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Width="{TemplateBinding IconSize}"
+                              Height="{TemplateBinding IconSize}"
+                              Data="{TemplateBinding IconData}"
+                              Fill="{TemplateBinding IconBrush}"
+                              Stretch="Uniform" />
+                        <!-- <Image Source="{SvgImage /Assets/Icons/house-fill.svg}" Height="32" Width="32" Stretch="Fill"></Image> -->
+                        <Label
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="{TemplateBinding LabelSize}"
+                            Content="{TemplateBinding Label}"
+                            Foreground="{TemplateBinding LabelBrush}"/>
+                    
+                    </StackPanel>
+                    
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|IconedLabel[TextPosition=Right] /template/ StackPanel#PART_StackPan">
+            <Setter Property="StackPanel.Orientation" Value="Horizontal"/>
+    </Style>
+        
+        
+</Styles>
