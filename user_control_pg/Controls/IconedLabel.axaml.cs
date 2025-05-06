@@ -1,4 +1,6 @@
 using Avalonia;
+using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Mixins;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 
@@ -12,8 +14,14 @@ public enum LabelPosition
     Right
 }
 
+[PseudoClasses(":pointerover", ":selected")]
 public class IconedLabel : TemplatedControl
 {
+    static IconedLabel()
+    {
+        SelectableMixin.Attach<IconedLabel>(IsSelectedProperty);
+    }
+    
     #region Icon
     public static readonly StyledProperty<Geometry> IconDataProperty =
         AvaloniaProperty.Register<IconedLabel, Geometry>(nameof(IconData));
@@ -62,6 +70,9 @@ public class IconedLabel : TemplatedControl
     
     public static readonly StyledProperty<double> LabelSizeProperty =
         AvaloniaProperty.Register<IconedLabel, double>(nameof(LabelSize), defaultValue: 12.0);
+    
+    public static readonly StyledProperty<bool> IsSelectedProperty =
+        SelectingItemsControl.IsSelectedProperty.AddOwner<IconedLabel>();
 
     public string Label
     {
