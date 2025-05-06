@@ -6,16 +6,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Bcan.Uctrls.Pg.ViewModels;
 
-public class NavBarItemVm
+public class NavBarItemVm(string text, bool isSelected, string? iconName = null)
 {
-    public NavBarItemVm(string text, bool isSelected) 
-    {
-        Text = text;
-        IsSelected = isSelected;
-    }
-    public string Text {get; set;} = string.Empty;
+    public string Text {get; set;} = text;
+    public bool IsSelected { get; set; } = isSelected;
 
-    public bool IsSelected { get; set; } = false;
+    public string? IconName { get; set; } = iconName;
 
     public override string ToString()
     {
