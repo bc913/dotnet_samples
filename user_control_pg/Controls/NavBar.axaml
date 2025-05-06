@@ -1,0 +1,127 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Bcan.Uctrls.Pg.ViewModels"
+             xmlns:avalonia_controls="using:Avalonia.Controls"
+             xmlns:sys="using:System"
+             x:Name="NavBarAsRoot"
+             x:Class="Bcan.Uctrls.Pg.Controls.NavBar"
+             x:DataType="vm:NavBarViewModel">
+
+            
+            <UserControl.Styles>
+
+                <Style Selector="DockPanel ListBox">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                
+                <Style Selector="ListBoxItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="ClipToBounds" Value="False"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+
+                <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+
+                <Style Selector="ListBoxItem:selected Border#PART_SelectionPipe">
+                    <Setter Property="Background" Value="{DynamicResource AppPrimaryColor}"/>
+                </Style>
+
+                <Style Selector="ListBoxItem:selected Label#NavbarItemText">
+                    <Setter Property="Foreground" Value="{DynamicResource AppActiveTextColor}"/>
+                </Style>
+
+                <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="Opacity" Value="0.9"/>
+                </Style>
+            </UserControl.Styles>
+
+            <DockPanel Margin="0" Background="Transparent">
+                
+                <ListBox ItemsSource="{Binding Items}" 
+                    SelectedItem="{Binding SelectedItem}"
+                    VerticalAlignment="Stretch" 
+                    HorizontalAlignment="Stretch"
+                    DockPanel.Dock="Top"
+                    Classes="navbarchild">
+
+                    
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ReversibleStackPanel ReverseOrder="True" Spacing="12"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="vm:NavBarItemVm">
+                            <Grid ColumnDefinitions="Auto, *" 
+                                Name="PART_Grid"
+                                Height="{Binding #NavBarAsRoot.ButtonHeight}"
+                                Width="{Binding #NavBarAsRoot.ButtonWidth}"
+                                Classes="navbarchild">
+
+                                <Border Name="PART_SelectionPipe" Grid.Column="0" 
+                                Margin="0" Padding="0" 
+                                Width="4"/>
+
+                                <Border Grid.Column="1" Margin="0" Padding="0">
+                                    <Label  Name="NavbarItemText"
+                                            Foreground="{DynamicResource AppInactiveTextColor}"
+                                            Content="{Binding Text}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                </Border>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Separator DockPanel.Dock="Bottom" Classes="navbarchild"/>
+                
+                <DockPanel LastChildFill="True">
+                    <ListBox ItemsSource="{Binding Items}"
+                    VerticalAlignment="Stretch" 
+                    HorizontalAlignment="Stretch"
+                    DockPanel.Dock="Bottom">
+
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ReversibleStackPanel ReverseOrder="True" Spacing="12"/>
+
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        
+                        <ListBox.ItemTemplate>
+                        <DataTemplate DataType="vm:NavBarItemVm">
+                            <Grid ColumnDefinitions="Auto, *" 
+                                Name="PART_Grid"
+                                Height="{Binding #NavBarAsRoot.ButtonHeight}"
+                                Width="{Binding #NavBarAsRoot.ButtonWidth}"
+                                Classes="navbarchild">
+
+                                <Border Name="PART_SelectionPipe" Grid.Column="0" 
+                                Margin="0" Padding="0" 
+                                Width="4"/>
+
+                                <Border Grid.Column="1" Margin="0" Padding="0">
+                                    <Label  Name="NavbarItemText"
+                                            Foreground="{DynamicResource AppInactiveTextColor}"
+                                            Content="{Binding Text}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                </Border>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </DockPanel>
+
+</UserControl>

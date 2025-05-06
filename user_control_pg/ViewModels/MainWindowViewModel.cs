@@ -11,17 +11,26 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     public string Greeting { get; } = "Welcome to Avalonia!";
 
+    [ObservableProperty]
+    private NavBarViewModel _navBarVm = new();
+
+
+    [ObservableProperty] private ObservableCollection<IconedButtonVm> _navBarItems = 
+    [
+        new (){Text = "Osman", Icon="Settings", Fill = "#348ff4"},
+        new (){Text = "Hasan", Icon="Download", Fill = "#B00020"}
+    ];
+
+    #region CTOR
+    public MainWindowViewModel() => NavBarVm = new([new NavBarItemVm("Osman", true), new NavBarItemVm("Necmi", false)]);
+    #endregion
+
+
     [RelayCommand]
     private void BcButtonClicked()
     {
         Console.WriteLine("BcButtonClicked");
     }
-
-    [ObservableProperty] private ObservableCollection<IconedButtonVm> _navBarItems = 
-        [
-            new (){Text = "Osman", Icon="Settings", Fill = "#348ff4"},
-            new (){Text = "Hasan", Icon="Download", Fill = "#B00020"}
-        ];
 
     [RelayCommand]
     public void ToggleTheme()
@@ -33,6 +42,12 @@ public partial class MainWindowViewModel : ViewModelBase
             Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
         else
             Application.Current.RequestedThemeVariant = ThemeVariant.Default;
+    }
+
+    [RelayCommand]
+    private void EllipseClicked()
+    {
+        Console.WriteLine($"{NavBarVm.SelectedItem}");
     }
 
 }

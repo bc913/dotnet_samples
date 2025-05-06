@@ -1,11 +1,11 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:Bcan.Uctrls.Pg.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         xmlns:controls="using:Bcan.Uctrls.Pg.Controls"
         xmlns:conv="using:Bcan.Uctrls.Pg.Converters"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm="using:Bcan.Uctrls.Pg.ViewModels"
         x:Class="Bcan.Uctrls.Pg.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -18,41 +18,38 @@
     </Design.DataContext>
     <!--https://github.com/wieslawsoltes/Svg.Skia/issues/237-->
     <DockPanel LastChildFill="True">
-        <Border Height="48" BorderThickness="2" BorderBrush="{DynamicResource AppSurfaceColor}" DockPanel.Dock="Top">
+        <Border Height="48" BorderThickness="0 0 0 2" BorderBrush="{DynamicResource AppSurfaceColor}" DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Dock = "Top"</TextBlock>
             </StackPanel>
         </Border>
         
-        <Border BorderThickness="0 0 4 0" BorderBrush="{DynamicResource AppSurfaceColor}" DockPanel.Dock="Left">
-            
-        <DockPanel>
-            <ItemsControl ItemsSource="{Binding NavBarItems}"
-                          DockPanel.Dock="Bottom">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ReversibleStackPanel ReverseOrder="True" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.DataTemplates>
-                    <DataTemplate DataType="vm:IconedButtonVm">
-                        <!-- <controls:IconedTextButton -->
-                        <!--     Label="{Binding Text}" -->
-                        <!--     ToolTipText="{Binding Text}" -->
-                        <!--     IconSize="24" -->
-                        <!--     Command="{Binding $parent.((vm:MainWindowViewModel)DataContext).ToggleThemeCommand}" -->
-                        <!--     IconData="{Binding Icon, Converter={StaticResource StreamGeometryConverter}}"/> -->
-                        
-                        <!-- <Svg Path="/Assets/Icons/svg/phosphor/waves.svg" Css="{Binding Fill, Converter={x:Static conv:BcValueConverters.ColorToCssConverter}}" Width="24" Height="24"></Svg> -->
-                        <Svg Path="/Assets/Icons/svg/phosphor/waves.svg" Css=".Black { fill: #ff416bdf; }" Width="24" Height="24"></Svg>
-                    </DataTemplate>
-                </ItemsControl.DataTemplates>
-            </ItemsControl>
-        </DockPanel>
-        </Border>
+        <controls:NavBar DataContext="{Binding NavBarVm}"
+            Margin="0"
+            Width="64"
+            ButtonHeight="64"
+            ButtonWidth="64"
+            BorderThickness="0 0 4 0" 
+            BorderBrush="{DynamicResource AppSurfaceColor}"
+            Background="{DynamicResource AppBackgroundColor}"
+            DockPanel.Dock="Left"/>
         
         <Border BorderThickness="1">
-            <TextBlock>This content will "Fill" the remaining space</TextBlock>
+            <StackPanel Orientation="Vertical"> 
+                <Button Theme="{StaticResource EllipseButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Command="{Binding EllipseClickedCommand}">
+                    Hello World!
+                </Button>
+
+                <Button
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" 
+                    Command="{Binding EllipseClickedCommand}">
+                    REgular
+                </Button>
+            </StackPanel>
         </Border>
     </DockPanel>
     
