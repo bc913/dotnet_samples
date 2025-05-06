@@ -37,5 +37,10 @@
                 </Panel>
             </ControlTemplate>
         </Setter>
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}" />
+            <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
+        </Style>
     </ControlTheme>
 </ResourceDictionary>
