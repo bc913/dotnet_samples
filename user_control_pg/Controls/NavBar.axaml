@@ -43,7 +43,7 @@
 
             <DockPanel Margin="0" Background="Transparent">
                 
-                <ListBox ItemsSource="{Binding Items}" 
+                <ListBox ItemsSource="{Binding TopItems}" 
                     SelectedItem="{Binding SelectedItem}"
                     VerticalAlignment="Stretch" 
                     HorizontalAlignment="Stretch"
@@ -85,7 +85,7 @@
                 
                 
                 <DockPanel LastChildFill="True" DockPanel.Dock="Bottom">
-                    <ListBox ItemsSource="{Binding Items}"
+                    <ListBox ItemsSource="{Binding TopItems}"
                     VerticalAlignment="Stretch" 
                     HorizontalAlignment="Stretch"
                     DockPanel.Dock="Bottom">

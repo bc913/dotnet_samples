@@ -17,13 +17,13 @@ public class NavBarItemVm(string text, bool isSelected, string? iconName = null)
     {
         return $"Text: {Text} | IsSelected: {IsSelected}";
     }
-
 }
+
 
 public partial class NavBarViewModel : ObservableObject
 {
     [ObservableProperty]
-    private IEnumerable<NavBarItemVm> _items = [];
+    private IEnumerable<NavBarItemVm> _topItems = [];
 
     public NavBarViewModel()
     {
@@ -32,8 +32,8 @@ public partial class NavBarViewModel : ObservableObject
 
     public NavBarViewModel(IEnumerable<NavBarItemVm> items)
     {
-        _items = items;
-        SelectedItem = Items.First();
+        _topItems = items;
+        SelectedItem = TopItems.First();
     }
 
     [ObservableProperty]
@@ -43,25 +43,21 @@ public partial class NavBarViewModel : ObservableObject
     {
         Console.WriteLine("-------------");
         Console.WriteLine("OnSelectedItemChanging");
-
+    
         if(oldValue is not null )
         {
             Console.WriteLine($"{oldValue}");
             oldValue.IsSelected = false;
             Console.WriteLine($"{oldValue}");
         }
-        
-        if(newValue is not null)
-        {
-            Console.WriteLine($"{newValue}");
-            newValue.IsSelected = true;
-            Console.WriteLine($"{newValue}");
-        }
 
-        
-
+        if (newValue is null) return;
+        Console.WriteLine($"{newValue}");
+        newValue.IsSelected = true;
+        Console.WriteLine($"{newValue}");
     }
-
+    
+    
     partial void OnSelectedItemChanged(NavBarItemVm oldValue, NavBarItemVm newValue)
     {
         Console.WriteLine("-------------");
