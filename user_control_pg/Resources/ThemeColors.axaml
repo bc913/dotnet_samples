@@ -19,7 +19,8 @@
     <Color x:Key="DarkThemeOnBackgroundColor">#ffffff</Color>
     <Color x:Key="DarkThemeOnSurfaceColor">#ffffff</Color>
     <Color x:Key="DarkThemeOnErrorColor">#000000</Color>
-
+    <Color x:Key="DarkThemeInactiveColor">#9e9d9d</Color>
+    
     <!--Light Theme-->
     <Color x:Key="LightThemePrimaryColor">#0367e0</Color> <!--Blue 700-->
     <Color x:Key="LightThemeBackgroundColor">#ffffff</Color>
@@ -30,6 +31,7 @@
     <Color x:Key="LightThemeOnBackgroundColor">#000000</Color>
     <Color x:Key="LightThemeOnSurfaceColor">#000000</Color>
     <Color x:Key="LightThemeOnErrorColor">#ffffff</Color>
+    <Color x:Key="LightThemeInactiveColor">#555555</Color>
 
 
     

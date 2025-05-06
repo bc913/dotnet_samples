@@ -17,6 +17,8 @@
             <SolidColorBrush x:Key="AppOnBackgroundColor" Color="{StaticResource DarkThemeOnBackgroundColor}"/>
             <SolidColorBrush x:Key="AppOnSurfaceColor" Color="{StaticResource DarkThemeOnSurfaceColor}"/>
             <SolidColorBrush x:Key="AppOnErrorColor" Color="{StaticResource DarkThemeOnErrorColor}"/>
+            <SolidColorBrush x:Key="AppInactiveTextColor" Color="{StaticResource DarkThemeInactiveColor}"/>
+            <SolidColorBrush x:Key="AppActiveTextColor" Color="{StaticResource DarkThemeOnBackgroundColor}"/>
             <sys:String x:Key="AppWavesSvgStr">avares://Bcan.Uctrls.Pg/Assets/Icons/svg/phosphor/waves-duotone.svg</sys:String>
             <SvgImage x:Key="AppWavesSvg" Source="avares://Bcan.Uctrls.Pg/Assets/Icons/svg/phosphor/waves.svg"></SvgImage>
         </ResourceDictionary>
@@ -35,6 +37,9 @@
             <SolidColorBrush x:Key="AppOnBackgroundColor" Color="{StaticResource LightThemeOnBackgroundColor}"/>
             <SolidColorBrush x:Key="AppOnSurfaceColor" Color="{StaticResource LightThemeOnSurfaceColor}"/>
             <SolidColorBrush x:Key="AppOnErrorColor" Color="{StaticResource LightThemeOnErrorColor}"/>
+            <SolidColorBrush x:Key="AppInactiveTextColor" Color="{StaticResource LightThemeInactiveColor}"/>
+            <SolidColorBrush x:Key="AppActiveTextColor" Color="{StaticResource LightThemeOnBackgroundColor}"/>
+            
             <sys:String x:Key="AppWavesSvgStr">avares://Bcan.Uctrls.Pg/Assets/Icons/svg/phosphor/waves-duotone.svg</sys:String>
 
             <SvgImage x:Key="AppWavesSvg" Source="avares://Bcan.Uctrls.Pg/Assets/Icons/svg/phosphor/waves-duotone.svg"></SvgImage>
