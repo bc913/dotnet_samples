@@ -30,9 +30,9 @@ public partial class NavBarViewModel : ObservableObject
         
     }
 
-    public NavBarViewModel(IEnumerable<NavBarItemVm> items)
+    public NavBarViewModel(IEnumerable<NavBarItemVm> topItems )
     {
-        _topItems = items;
+        _topItems = topItems;
         SelectedItem = TopItems.First();
     }
 
