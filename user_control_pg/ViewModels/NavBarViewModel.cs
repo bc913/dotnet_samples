@@ -24,15 +24,19 @@ public partial class NavBarViewModel : ObservableObject
 {
     [ObservableProperty]
     private IEnumerable<NavBarItemVm> _topItems = [];
+    
+    [ObservableProperty]
+    private IEnumerable<NavBarItemVm> _bottomItems = [];
 
     public NavBarViewModel()
     {
         
     }
 
-    public NavBarViewModel(IEnumerable<NavBarItemVm> topItems )
+    public NavBarViewModel(IEnumerable<NavBarItemVm> topItems, IEnumerable<NavBarItemVm> bottomItems)
     {
         _topItems = topItems;
+        _bottomItems = bottomItems;
         SelectedItem = TopItems.First();
     }
 

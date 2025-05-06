@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:Bcan.Uctrls.Pg.ViewModels"
-             xmlns:avalonia_controls="using:Avalonia.Controls"
+             xmlns:controls="using:Bcan.Uctrls.Pg.Controls"
              xmlns:sys="using:System"
              x:Name="NavBarAsRoot"
              x:Class="Bcan.Uctrls.Pg.Controls.NavBar"
@@ -39,6 +39,19 @@
                     <Setter Property="Cursor" Value="Hand" />
                     <Setter Property="Opacity" Value="0.9"/>
                 </Style>
+                
+                <Style Selector="ListBoxItem:selected PathIcon#ListBoxItem_IconedLabel">
+                    <Setter Property="Foreground" Value="{DynamicResource AppActiveTextColor}" />
+                </Style>
+                
+                <!-- <Style Selector="controls|IconedLabel:pointerover"> -->
+                <!--     <Setter Property="Cursor" Value="Hand" /> -->
+                <!-- </Style> -->
+                <!-- -->
+                <!-- <Style Selector="controls|IconedLabel:selected"> -->
+                <!--     <Setter Property="IconBrush" Value="{DynamicResource AppActiveTextColor}" /> -->
+                <!--     <Setter Property="LabelBrush" Value="{DynamicResource AppActiveTextColor}"/> -->
+                <!-- </Style> -->
             </UserControl.Styles>
 
             <DockPanel Margin="0" Background="Transparent">
@@ -85,39 +98,36 @@
                 
                 
                 <DockPanel LastChildFill="True" DockPanel.Dock="Bottom">
-                    <ListBox ItemsSource="{Binding TopItems}"
+                    <ListBox ItemsSource="{Binding BottomItems}"
                     VerticalAlignment="Stretch" 
                     HorizontalAlignment="Stretch"
                     DockPanel.Dock="Bottom">
 
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <ReversibleStackPanel ReverseOrder="True" Spacing="12"/>
-
+                                <StackPanel Spacing="12"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                         
                         <ListBox.ItemTemplate>
                         <DataTemplate DataType="vm:NavBarItemVm">
-                            <Grid ColumnDefinitions="Auto, *" 
-                                Name="PART_Grid"
-                                Height="{Binding #NavBarAsRoot.ButtonHeight}"
-                                Width="{Binding #NavBarAsRoot.ButtonWidth}"
-                                Classes="navbarchild">
-
-                                <Border Name="PART_SelectionPipe" Grid.Column="0" 
-                                Margin="0" Padding="0" 
-                                Width="4"/>
-
-                                <Border Grid.Column="1" Margin="0" Padding="0">
-                                    <Label  Name="NavbarItemText"
-                                            Foreground="{DynamicResource AppInactiveTextColor}"
-                                            Content="{Binding Text}"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center"/>
-                                </Border>
-
-                            </Grid>
+                            <!-- <controls:IconedLabel -->
+                            <!--     Name="ListBoxItem_IconedLabel" -->
+                            <!--     IconSize="32" -->
+                            <!--     IconData="{Binding IconName, Converter={StaticResource StreamGeometryConverter}}" -->
+                            <!--     IconBrush="{DynamicResource AppInactiveTextColor}" -->
+                            <!--     Label="{Binding Text}" -->
+                            <!--     LabelSize="12" -->
+                            <!--     LabelBrush="{DynamicResource AppInactiveTextColor}"/> -->
+                            
+                            <Border Margin="8" Padding="0">
+                                <PathIcon 
+                                    Name="ListBoxItem_IconedLabel"
+                                    Width="32"
+                                    Height="32"
+                                    Foreground="{DynamicResource AppInactiveTextColor}"
+                                    Data="{Binding IconName, Converter={StaticResource StreamGeometryConverter}}"></PathIcon>
+                            </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     </ListBox>

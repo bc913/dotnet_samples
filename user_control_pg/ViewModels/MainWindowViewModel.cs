@@ -22,7 +22,10 @@ public partial class MainWindowViewModel : ViewModelBase
     ];
 
     #region CTOR
-    public MainWindowViewModel() => NavBarVm = new([new NavBarItemVm("Osman", true), new NavBarItemVm("Necmi", false)]);
+    public MainWindowViewModel() => NavBarVm = new(
+        [new NavBarItemVm("Osman", true), new NavBarItemVm("Necmi", false)],
+        [new NavBarItemVm("Settings", false, "FluentIconSgSettingsRegular")]
+        );
     #endregion
 
 
