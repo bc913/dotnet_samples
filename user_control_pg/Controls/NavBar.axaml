@@ -54,7 +54,7 @@
                 <!-- </Style> -->
             </UserControl.Styles>
 
-            <DockPanel Margin="0" Background="Transparent">
+            <DockPanel Margin="0">
                 
                 <ListBox ItemsSource="{Binding TopItems}" 
                     SelectedItem="{Binding SelectedItem}"
