@@ -82,9 +82,9 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <Separator DockPanel.Dock="Bottom" Classes="navbarchild"/>
                 
-                <DockPanel LastChildFill="True">
+                
+                <DockPanel LastChildFill="True" DockPanel.Dock="Bottom">
                     <ListBox ItemsSource="{Binding Items}"
                     VerticalAlignment="Stretch" 
                     HorizontalAlignment="Stretch"
@@ -122,6 +122,8 @@
                     </ListBox.ItemTemplate>
                     </ListBox>
                 </DockPanel>
+                
+                <Separator Classes="navbarchild"/>
             </DockPanel>
 
 </UserControl>
