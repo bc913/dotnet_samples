@@ -18,11 +18,18 @@
     </Design.DataContext>
     <!--https://github.com/wieslawsoltes/Svg.Skia/issues/237-->
     <DockPanel LastChildFill="True">
-        <Border Height="48" BorderThickness="0 0 0 2" BorderBrush="{DynamicResource AppSurfaceColor}" DockPanel.Dock="Top">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock>Dock = "Top"</TextBlock>
-            </StackPanel>
-        </Border>
+        <!-- <Border Height="48" BorderThickness="0 0 0 2" BorderBrush="{DynamicResource AppSurfaceColor}" DockPanel.Dock="Top"> -->
+        <!--     <StackPanel Orientation="Horizontal"> -->
+        <!--         <TextBlock>Dock = "Top"</TextBlock> -->
+        <!--     </StackPanel> -->
+        <!-- </Border> -->
+        
+        <controls:TopBar 
+            DockPanel.Dock="Top" 
+            Height="64" BorderThickness="0 0 0 2" 
+            BorderBrush="{DynamicResource AppSurfaceColor}">
+            
+        </controls:TopBar>
         
         <controls:NavBar DataContext="{Binding NavBarVm}"
             Margin="0"
