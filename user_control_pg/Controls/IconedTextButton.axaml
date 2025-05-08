@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:Bcan.Uctrls.Pg.Controls">
     <Design.PreviewWith>
-        <StackPanel>
+        <StackPanel Spacing="12">
             <!-- <controls:IconedTextButton IconSize="32"  -->
             <!--                            IconData="{StaticResource Settings}" -->
             <!--                            IconBrush="Blue" -->
@@ -21,6 +21,15 @@
                                        IconData="{StaticResource Settings}"
                                        Label="Settings"
                                        LabelSize="14"/>
+            
+            <controls:IconedTextButton Width="64"
+                                       Height="64"
+                                       BorderBrush="Gray"
+                                       BorderThickness="1"
+                                        IconSize="32" 
+                                       IconData="{StaticResource Settings}"
+                                       Label="Settings"
+                                       LabelSize="8"/>
         </StackPanel>
     </Design.PreviewWith>
 
@@ -31,14 +40,18 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Button Name="PART_IconButton"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
                         Background="Transparent"
-                        BorderThickness="0"
                         Command="{TemplateBinding Command}"
                         CommandParameter="{TemplateBinding CommandParameter}"
                         ToolTip.Tip="{TemplateBinding ToolTipText}"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
-                        Padding="4">
+                        Padding="4"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        CornerRadius="0">
                     
                     <!-- <ToolTip.Tip> -->
                     <!--     <StackPanel> -->

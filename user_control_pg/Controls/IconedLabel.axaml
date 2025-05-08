@@ -37,9 +37,9 @@
         <Setter Property="LabelBrush" Value="{DynamicResource AppOnBackgroundColor}"></Setter>
         <Setter Property="Template">
             <ControlTemplate>
-                <Border Padding="4 4 4 4" ClipToBounds="True" Background="Transparent">
+                <Border Padding="0" ClipToBounds="True" Background="Transparent">
                     
-                    <StackPanel Orientation="Vertical" Spacing="4" Name="PART_StackPan">
+                    <StackPanel Orientation="Vertical" Spacing="0" Margin="0" Name="PART_StackPan">
                         <Path Name="PART_IconPath"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center"
