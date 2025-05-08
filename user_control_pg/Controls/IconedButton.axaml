@@ -93,12 +93,13 @@
             <ControlTemplate>
                 <Button Name="PART_IconButton"
                         Background="Transparent"
-                        BorderThickness="0"
                         Command="{TemplateBinding Command}"
                         CommandParameter="{TemplateBinding CommandParameter}"
                         Width="{TemplateBinding ButtonWidth}"
                         Height="{TemplateBinding ButtonHeight}"
-                        Padding="4">
+                        Padding="{TemplateBinding Padding}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}">
                     
                     <ToolTip.Tip>
                         <StackPanel>
