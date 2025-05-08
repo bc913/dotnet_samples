@@ -3,6 +3,79 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:controls="using:Bcan.Uctrls.Pg.Controls"
+             x:Name="TopBarAsRoot"
              x:Class="Bcan.Uctrls.Pg.Controls.TopBar">
-    Welcome to Avalonia!
+    
+    <DockPanel HorizontalAlignment="Stretch" LastChildFill="False">
+        
+        <Border DockPanel.Dock="Left" Width="128" Background="Transparent"></Border>
+        <controls:IconedButton DockPanel.Dock="Left"
+                               ToolTipText="Settings" 
+                               IconBrush="{DynamicResource AppInactiveTextColor}"
+                               IconSize="24"
+                               IconData="{StaticResource FluentIconSgSaveRegular}"
+                               ButtonHeight="32"
+                               ButtonWidth="32">
+            
+        </controls:IconedButton>
+        <Border DockPanel.Dock="Left" Width="12" Background="Transparent"></Border>
+        
+        <controls:IconedTextButton DockPanel.Dock="Left"
+                                   Width="48"
+                                   Height="48"
+                                   BorderBrush="{DynamicResource AppInactiveTextColor}"
+                                   BorderThickness="1"
+                                   ToolTipText="Save document" 
+                                   IconBrush="{DynamicResource AppInactiveTextColor}"
+                                   IconSize="16"
+                                   IconData="{StaticResource FluentIconSgSaveRegular}"
+                                   Label="Save"
+                                   LabelSize="8"
+                                   LabelBrush="{DynamicResource AppInactiveTextColor}">
+            
+        </controls:IconedTextButton>
+        
+        <Border DockPanel.Dock="Left" Width="12" Background="Transparent"></Border>
+        
+        <controls:IconedTextButton DockPanel.Dock="Left"
+                                   Width="48"
+                                   Height="48"
+                                   BorderBrush="{DynamicResource AppInactiveTextColor}"
+                                   BorderThickness="1"
+                                   ToolTipText="Save document as" 
+                                   IconBrush="{DynamicResource AppInactiveTextColor}"
+                                   IconSize="16"
+                                   IconData="{StaticResource FluentIconSgSaveAsRegular}"
+                                   Label="Save As"
+                                   LabelSize="8"
+                                   LabelBrush="{DynamicResource AppInactiveTextColor}">
+            
+        </controls:IconedTextButton>
+        
+        <Border DockPanel.Dock="Left" Width="12" Background="Transparent"></Border>
+        
+        <controls:IconedTextButton DockPanel.Dock="Left"
+                                   Width="48"
+                                   Height="48"
+                                   BorderBrush="{DynamicResource AppInactiveTextColor}"
+                                   BorderThickness="1"
+                                   ToolTipText="Table" 
+                                   IconBrush="{DynamicResource AppInactiveTextColor}"
+                                   IconSize="16"
+                                   IconData="{StaticResource FluentIconSgTableRegular}"
+                                   Label="Table"
+                                   LabelSize="8"
+                                   LabelBrush="{DynamicResource AppInactiveTextColor}">
+            
+        </controls:IconedTextButton>
+        
+        <Border Width="24" Background="Transparent" DockPanel.Dock="Left"></Border>
+        <Separator DockPanel.Dock="Left" Background="{DynamicResource SystemChromeAltLowColor}" 
+                   Opacity="0.3" 
+                   Width="0.55" 
+                   Height="NaN"
+                   Margin="6,6,6,7"/>
+    </DockPanel>
+    
 </UserControl>
