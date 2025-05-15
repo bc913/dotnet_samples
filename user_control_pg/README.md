@@ -66,3 +66,163 @@
                                     
                                 </Button.Styles>
 ```
+
+
+
+## Using DataTemplates for collection of different types or values
+1. Using IValueConverter and DataTemplates
+
+```csharp
+public class AppSettingTemplateSelector : IValueConverter
+{
+    public IDataTemplate StringTemplate { get; set; }
+    public IDataTemplate BooleanTemplate { get; set; }
+    public IDataTemplate IntTemplate { get; set; }
+    
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is AppSettingVm appSetting)
+        {
+            if (appSetting.Value is string && StringTemplate is not null)
+                return StringTemplate;
+        
+            if (appSetting.Value is int && IntTemplate is not null)
+                return IntTemplate;
+        
+            if(appSetting.Value is bool && BooleanTemplate is not null)
+                return BooleanTemplate;
+        }
+        
+        
+        return new BindingNotification(new InvalidCastException(), 
+            BindingErrorType.Error);
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        return new BindingNotification(new InvalidCastException(), 
+            BindingErrorType.Error);
+    }
+}
+```
+
+```xaml
+<UserControl.Resources>
+        
+        <DataTemplate x:Key="AppStringSettingTemplate" x:DataType="vm:AppSettingVm">
+            <TextBox Text="{Binding Value}"></TextBox>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="AppBoolSettingTemplate" x:DataType="vm:AppSettingVm">
+            <CheckBox IsChecked="{Binding Value}"></CheckBox>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="AppIntSettingTemplate" x:DataType="vm:AppSettingVm">
+            <NumericUpDown Value="{Binding Value}"></NumericUpDown>
+        </DataTemplate>
+        
+        <conv:AppSettingTemplateSelector x:Key="AppSettingTemplateSelector"
+                                         StringTemplate="{StaticResource AppStringSettingTemplate}"
+                                         BooleanTemplate="{StaticResource AppBoolSettingTemplate}"
+                                         IntTemplate="{StaticResource AppIntSettingTemplate}"/>
+    </UserControl.Resources>
+    
+    <ItemsControl ItemsSource="{Binding FilteredSettings}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="vm:AppSettingVm">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding DisplayName}"></TextBlock>
+                    <ContentControl Margin="10 0 0 0"
+                                    Content="{Binding }"
+                                    ContentTemplate="{Binding ., Converter={StaticResource AppSettingTemplateSelector}}"/>    
+                </StackPanel>
+                
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+```
+
+2. Using IDataTemplate
+
+```csharp
+public class AppSettingDataTemplateSelector : IDataTemplate
+{
+    public IDataTemplate? TextTemplate { get; set; }
+    public IDataTemplate? BooleanTemplate { get; set; }
+    public IDataTemplate? IntTemplate { get; set; }
+    
+    public Control? Build(object? param)
+    {
+        if (param is not AppSettingVm appSetting)
+            throw new NotSupportedException();
+        
+        if(appSetting.Type == typeof(string))
+            return TextTemplate?.Build(param ?? throw new NullReferenceException());
+        
+        if(appSetting.Type == typeof(bool))
+            return BooleanTemplate?.Build(param ?? throw new NullReferenceException());
+        
+        if(appSetting.Type == typeof(int))
+            return IntTemplate?.Build(param ?? throw new NullReferenceException());
+        
+        throw new NotSupportedException();
+    }
+
+    public bool Match(object? data)
+    {
+        return data is AppSettingVm;
+    }
+}
+```
+
+```xaml
+<UserControl.Resources>
+
+    <DataTemplate x:Key="AppStringSettingTemplate" x:DataType="vm:AppSettingVm">
+        <TextBox Text="{Binding Value}"></TextBox>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="AppBoolSettingTemplate" x:DataType="vm:AppSettingVm">
+        <CheckBox IsChecked="{Binding Value}"></CheckBox>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="AppIntSettingTemplate" x:DataType="vm:AppSettingVm">
+        <NumericUpDown Value="{Binding Value}"></NumericUpDown>
+    </DataTemplate>
+
+</UserControl.Resources>
+
+<ItemsControl ItemsSource="{Binding FilteredSettings}">
+    <ItemsControl.DataTemplates>
+        <conv:AppSettingDataTemplateSelector
+            TextTemplate="{StaticResource AppStringSettingTemplate}"
+            BooleanTemplate="{StaticResource AppBoolSettingTemplate}"
+            IntTemplate="{StaticResource AppIntSettingTemplate}"></conv:AppSettingDataTemplateSelector>
+    </ItemsControl.DataTemplates>
+</ItemsControl>
+```
+
+or
+```xaml
+<ItemsControl ItemsSource="{Binding FilteredSettings}">
+    <ItemsControl.Resources>
+        <DataTemplate x:Key="AppStringSettingDataTemplate" x:DataType="vm:AppSettingVm">
+            <TextBox Text="{Binding Value}"></TextBox>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AppBoolSettingDataTemplate" x:DataType="vm:AppSettingVm">
+            <CheckBox IsChecked="{Binding Value}"></CheckBox>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AppIntSettingDataTemplate" x:DataType="vm:AppSettingVm">
+            <NumericUpDown Value="{Binding Value}"></NumericUpDown>
+        </DataTemplate>
+    </ItemsControl.Resources>
+    <ItemsControl.DataTemplates>
+        <conv:AppSettingDataTemplateSelector
+            TextTemplate="{StaticResource AppStringSettingDataTemplate}"
+            BooleanTemplate="{StaticResource AppBoolSettingDataTemplate}"
+            IntTemplate="{StaticResource AppIntSettingDataTemplate}"></conv:AppSettingDataTemplateSelector>
+    </ItemsControl.DataTemplates>
+</ItemsControl>
+```
