@@ -226,3 +226,7 @@ or
     </ItemsControl.DataTemplates>
 </ItemsControl>
 ```
+
+## Async Initialization
+- https://www.reddit.com/r/AvaloniaUI/comments/1h0gjq5/async_initialization/
+- https://github.com/wieslawsoltes/Xaml.Behaviors
