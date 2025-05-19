@@ -13,14 +13,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="blogging.db" />
-  </ItemGroup>
+<!--  <ItemGroup>-->
+<!--    <None Remove="blogging.db" />-->
+<!--  </ItemGroup>-->
 
-  <ItemGroup>
-    <Content Include="blogging.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+<!--  <ItemGroup>-->
+<!--    <Content Include="blogging.db">-->
+<!--      <CopyToOutputDirectory>Always</CopyToOutputDirectory>-->
+<!--    </Content>-->
+<!--  </ItemGroup>-->
 
 </Project>
