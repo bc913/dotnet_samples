@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SqliteNet\Bcan.Persistence.Pg.SqliteNet.csproj" />
     <ProjectReference Include="..\Dapper\Bcan.Persistence.Pg.Dapper.csproj" />
+    <ProjectReference Include="..\LiteDb\Bcan.Persistence.Pg.LiteDb.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
