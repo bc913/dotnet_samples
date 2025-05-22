@@ -13,3 +13,10 @@
 
 ## Sqlite - NET
 - [Github - Sqlite-net](https://github.com/praeclarum/sqlite-net)
+
+## LiteDb
+- [Migration](https://github.com/litedb-org/LiteDB/issues/524)
+- [Migration](https://github.com/litedb-org/LiteDB/issues/590)
+- [Migration](https://github.com/litedb-org/LiteDB/issues/778)
+  https://platform.uno/blog/intro-to-litedb-for-net-developers-sample-webapp-included/
+  https://github.com/mlockett42/litedb-async

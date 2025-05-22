@@ -32,8 +32,8 @@ public class LiteDbRepository<T> : IDisposable where T : IEntity
     {
         ArgumentNullException.ThrowIfNull(entity);
         // Not sure about this
-        if(string.IsNullOrEmpty(entity.Id))
-            entity.Id = Guid.NewGuid().ToString();
+        // if(string.IsNullOrEmpty(entity.Id))
+        //     entity.Id = Guid.NewGuid().ToString();
         _collection.Insert(entity);
     }
 

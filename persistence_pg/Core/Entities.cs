@@ -2,12 +2,12 @@ namespace DefaultNamespace;
 
 public interface IEntity
 {
-    string Id { get; set; }
+    int Id { get; set; }
 }
 
 public abstract class EntityBase : IEntity
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString(); 
+    public int Id { get; set; }
 }
 
 public class Customer : EntityBase
@@ -25,6 +25,10 @@ public class Address
     public string State { get; set; }
     public string PostalCode { get; set; }
     public string Country { get; set; }
+    public override string ToString()
+    {
+        return $"Street: {Street}, City: {City}, State: {State}, PostalCode: {PostalCode} | Country: {Country}";
+    }
 }
 
 public class Order : EntityBase
@@ -39,4 +43,9 @@ public class OrderItem
     public string ProductName { get; set; }
     public int Quantity { get; set; }
     public decimal UnitPrice { get; set; }
+
+    public override string ToString()
+    {
+        return $"Product: {ProductName}, Quantity: {Quantity}, UnitPrice: {UnitPrice}";
+    }
 }
